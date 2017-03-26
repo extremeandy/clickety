@@ -1,10 +1,10 @@
 <template name="game">
   <h1>Clickety!</h1>
   <h3>{{gameState.description}}</h3>
-  <ul>
+  <ul class="players">
     {{#each players}}
       <li>
-        <button value={{_id}} disabled={{ disableAttack }}>
+        <button class="btn btn-info" value={{_id}} disabled={{ disableAttack }}>
           {{username}} {{#if showScore}}({{score}}){{/if}}
         </button>
       </li>

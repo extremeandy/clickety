@@ -21,7 +21,8 @@ Template.game.helpers({
 
 Template.game.events({
   'click button'(event) {
-    const playerId = event.target.value;
-    Meteor.call("players.attack", playerId);
+    const playerIdToAttack = event.target.value;
+    const attackingPlayerId = Session.get('currentPlayerId');
+    Meteor.call("players.attack", playerIdToAttack, attackingPlayerId);
   }
 });
