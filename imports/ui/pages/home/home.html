@@ -1,4 +1,9 @@
 <template name="App_home">
-  {{> hello}}
-  {{> info}}
+  <div class="container-fluid">
+    {{#if currentPlayer}}
+      {{> game}}
+    {{else}}
+      {{> register}}
+    {{/if}}
+  </div>
 </template>

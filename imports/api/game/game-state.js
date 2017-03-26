@@ -1,0 +1,1 @@
+export const GameState = new Mongo.Collection('gameState');

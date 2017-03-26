@@ -1,0 +1,13 @@
+<template name="game">
+  <h1>Clickety!</h1>
+  <h3>{{gameState.description}}</h3>
+  <ul>
+    {{#each players}}
+      <li>
+        <button value={{_id}} disabled={{ disableAttack }}>
+          {{username}} {{#if showScore}}({{score}}){{/if}}
+        </button>
+      </li>
+    {{/each}}
+  </ul>
+</template>

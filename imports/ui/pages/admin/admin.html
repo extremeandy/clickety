@@ -1,0 +1,13 @@
+<template name="App_admin">
+  <div class="container-fluid">
+    <h1>Admin Controls</h1>
+
+    <form>
+      <button type="submit" class="btn btn-default" name="removeAll">Delete all players</button>
+      <button type="submit" class="btn btn-default" name="start">Start game</button>
+      <button type="submit" class="btn btn-default" name="reset">Reset</button>
+    </form>
+
+    {{>game}}
+  </div>
+</template>
