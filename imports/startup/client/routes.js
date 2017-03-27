@@ -3,6 +3,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
+import '../../ui/pages/intro/intro.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/admin/admin.js';
 import '../../ui/pages/not-found/not-found.js';
@@ -12,6 +13,13 @@ FlowRouter.route('/', {
   name: 'App.home',
   action() {
     BlazeLayout.render('App_body', { main: 'App_home' });
+  },
+});
+
+FlowRouter.route('/intro', {
+  name: 'App.intro',
+  action() {
+    BlazeLayout.render('App_intro', { main: 'App_intro' });
   },
 });
 
