@@ -12,7 +12,7 @@ Meteor.startup(() => {
   GameState.remove({});
   GameState.insert({
     inProgress: false,
-    description: "Waiting for admin to start game"
+    description: "<h2>Waiting for admin to start game</h2>"
   });
 });
 

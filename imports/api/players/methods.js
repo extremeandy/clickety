@@ -25,13 +25,25 @@ Meteor.methods({
     }
     const playerToAttack = Players.findOne({ _id: playerIdToAttack });
     const newScore = Math.max(playerToAttack.score - 1, 0);
+
+    if (newScore !== playerToAttack.score) {
+      // Successful attack!
+      Players.update({ _id: attackingPlayerId }, { $set: { attacks: attackingPlayer.attacks + 1 } });
+    }
+
     Players.update({ _id: playerIdToAttack}, { $set: { score: newScore }});
     if (newScore === 0) {
       // How many players remaining with a score more than zero?
       const remainingPlayers = Players.find({ score: { $gt: 0 } });
       if (remainingPlayers.count() === 1) {
         const winningPlayer = remainingPlayers.fetch()[0];
-        GameState.update({}, { $set: { inProgress: false, description: `GAME OVER! Winner is: ${winningPlayer.username}` }});
+        GameState.update({}, {
+          $set: {
+            inProgress: false,
+            description: `<h2>Game over!</h2><h3>The winner is: <strong>${winningPlayer.username}</strong></h3>`,
+            finishedAt: new Date()
+          }
+        });
       }
     }
   }

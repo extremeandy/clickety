@@ -1,11 +1,18 @@
 <template name="game">
-  <h1>Clickety!</h1>
-  <h3>{{gameState.description}}</h3>
+  {{{gameState.description}}}
+  {{#if strongestAttacker}}
+    <p>The strongest attacker was <strong>{{strongestAttacker.username}}</strong>,
+      with <strong>{{strongestAttacker.attacks}}</strong> attacks and a click rate of
+      <strong>{{strongestAttacker.clicksPerSecond}}</strong> clicks per second.</p>
+  {{/if}}
   <ul class="players">
     {{#each players}}
       <li>
-        <button class="btn btn-info" value={{_id}} disabled={{ disableAttack }}>
-          {{username}} {{#if showScore}}({{score}}){{/if}}
+        <button class={{buttonClass}} value={{_id}} disabled={{ disableAttack }}>
+          {{username}}
+          {{#if showScore}}
+            ({{score}})
+          {{/if}}
         </button>
       </li>
     {{/each}}
