@@ -9,6 +9,12 @@ Meteor.methods({
   'players.insert'(username) {
     check(username, String);
 
+    const existingPlayer = Players.findOne({ username: username });
+
+    if (existingPlayer != null) {
+      return existingPlayer._id;
+    }
+
     return Players.insert({
       username,
       createdAt: new Date(),
@@ -30,12 +36,22 @@ Meteor.methods({
     const playerToAttack = Players.findOne({ _id: playerIdToAttack });
     const newScore = Math.max(playerToAttack.score - 1, 0);
 
-    if (newScore !== playerToAttack.score) {
-      // Successful attack!
-      Players.update({ _id: attackingPlayerId }, { $set: { attacks: attackingPlayer.attacks + 1 } });
+    if (newScore === playerToAttack.score) {
+      return;
     }
+    
+    Players.update({ _id: attackingPlayerId }, {
+      $set: {
+        attacks: attackingPlayer.attacks + 1
+      }
+    });
 
-    Players.update({ _id: playerIdToAttack}, { $set: { score: newScore }});
+    Players.update({ _id: playerIdToAttack}, {
+      $set: {
+        score: newScore
+      }
+    });
+
     if (newScore === 0) {
       // How many players remaining with a score more than zero?
       const remainingPlayers = Players.find({ score: { $gt: 0 } });
