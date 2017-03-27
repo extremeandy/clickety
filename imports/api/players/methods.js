@@ -18,6 +18,10 @@ Meteor.methods({
     Players.remove({});
   },
   'players.attack'(playerIdToAttack, attackingPlayerId) {
+    // if (Meteor.isServer) {
+    //   Meteor._sleepForMs(200);
+    // }
+
     const attackingPlayer = Players.findOne({ _id: attackingPlayerId });
     if (attackingPlayer.score === 0) {
       // Attacking player must be alive to attack others!

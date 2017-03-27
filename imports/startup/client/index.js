@@ -2,3 +2,4 @@
 
 import './routes.js';
 import './array-extensions.js';
+import '../../api/players/methods.js';
