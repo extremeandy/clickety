@@ -18,7 +18,7 @@ FlowRouter.route('/', {
 FlowRouter.route('/admin', {
   name: 'App.admin',
   action() {
-    if (!/localhost/.test(Meteor.absoluteUrl())) {
+    if (location.host !== "localhost:3000") {
       FlowRouter.redirect('/');
     }
     BlazeLayout.render('App_admin', { main: 'App_admin' });
