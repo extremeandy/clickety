@@ -1,6 +1,7 @@
 import { Players } from '/imports/api/players/players.js';
 import { GameState } from '/imports/api/game/game-state.js';
 import { GameConfiguration } from '/imports/api/game/configuration.js';
+import { SoundFx } from '/imports/ui/lib/sound-fx.js';
 import { Meteor } from 'meteor/meteor';
 import './game.html';
 
@@ -87,6 +88,14 @@ Template.game.events({
     event.preventDefault();
 
     const playerIdToAttack = event.target.value;
+    const playerToAttack = Players.findOne({ _id: playerIdToAttack });
+    if (playerToAttack.score > 1) {
+      SoundFx.playRandom();
+    } else {
+      // Death sound effect
+      SoundFx.playFileName("attack.mp3");
+    }
+
     const attackingPlayerId = Session.get('currentPlayerId');
     Meteor.call("players.attack", playerIdToAttack, attackingPlayerId);
   }
